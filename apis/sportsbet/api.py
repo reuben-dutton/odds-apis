@@ -33,6 +33,7 @@ class SportsBetOddsAPI(OddsAPIBase):
                 If not given, default is false
             eventFilter [str] - matches, outrights
                 Filters for matches or futures (outrights)
+                If not given, both are included
             numMarkets [int]
                 Specify many markets are included in the response data
                 If not given, then return all markets possible
@@ -44,7 +45,7 @@ class SportsBetOddsAPI(OddsAPIBase):
             params = dict()
             params['displayType'] = 'default'
             params['includeTopMarkets'] = "false"
-            params['eventFilter'] = 'matches'
+            # params['eventFilter'] = 'matches'
         else:
             # convert includeTopMarkets to a string in lowercase
             params['includeTopMarkets'] = str(params.get(includeTopMarkets, "false")).lower()
@@ -102,7 +103,3 @@ class SportsBetOddsAPI(OddsAPIBase):
             return resp.json()
         else:
             raise Exception("Request failed with error code %s" % resp.status_code)
-
-
-if __name__ == "__main__":
-    oddsAPI = SportsBetOddsAPI()
